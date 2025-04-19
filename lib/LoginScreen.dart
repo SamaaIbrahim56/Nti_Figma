@@ -123,7 +123,7 @@ class _LoginscreenState extends State<Loginscreen> {
                       TextButton(onPressed: (){
                         Navigator.pushNamed(context, 'RegisterScreen');
 
-                      }, child: Text("Register",style: TextStyle(color: Colors.black,fontSize: 16),))
+                      }, child: Text("Register",style: TextStyle(color: Colors.black,fontSize: 17),))
                     ],
                   )
                 ],
