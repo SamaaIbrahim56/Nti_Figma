@@ -20,6 +20,8 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF3F5F4),
+
       body: Form(
         key: formkey,
         child: Column(
@@ -40,6 +42,8 @@ class _LoginscreenState extends State<Loginscreen> {
                       controller: UserController,
                       enabled:true,
                       decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
                           hintText: "Username",
                           labelText: "name",
                           prefixIcon: Icon(Icons.person),
@@ -59,6 +63,8 @@ class _LoginscreenState extends State<Loginscreen> {
                     enabled:true,
                     obscureText: !PasswordVisible,
                     decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
                         hintText: "Password",
                         labelText: "Password",
                         suffixIcon: IconButton(
