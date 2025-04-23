@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:nti_figma/utils/app_colors.dart';
 
 abstract class AppBorderDecoration {
   static const double _radius = 20;
-  static const Color _borderColor = Colors.grey;
+  static const Color _borderColor = AppColors.lightGrey;
   static const Color _errorColor = Colors.red;
 
   static final OutlineInputBorder enabledBorder = OutlineInputBorder(
