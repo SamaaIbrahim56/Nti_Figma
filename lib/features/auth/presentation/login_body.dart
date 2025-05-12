@@ -192,7 +192,7 @@ class LoginBody extends StatelessWidget {
               } else if (state is LoginErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   (SnackBar(
-                    content: Text("${LoginCubit.get(context).error}"),
+                    content: Text("$state.error}"),
                     backgroundColor: Colors.red,
                   )),
                 );

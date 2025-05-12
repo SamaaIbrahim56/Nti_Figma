@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
           "AddTask": (context) => AddTask(),
           "TaskScreen": (context) => TasksScreen(),
         },
-        home: HomeScreen(),
+        home: RegisterScreen(),
       ),
     );
   }

@@ -248,10 +248,12 @@ class RegisterBody extends StatelessWidget {
           } else if (state is RegisterErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
               (SnackBar(
-                content: Text("${RegisterCubit.get(context).error}"),
+                content: Text("${state.error}"),
                 backgroundColor: Colors.red,
               )),
             );
+          }else if(state is RegisterLoadingState){
+            Center(child: CircularProgressIndicator());
           }
         },
       ),
