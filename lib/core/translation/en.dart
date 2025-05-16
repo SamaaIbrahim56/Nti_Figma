@@ -45,6 +45,7 @@ Map<String, String> en = {
   TranslationKeys.dontHaveAccount: "Don't Have An Account?",
   TranslationKeys.loginError: "An error occurred during login, please try again later",
   TranslationKeys.alreadyHaveAccount: "Already Have An Account?",
+  TranslationKeys.DeleteUser: "Delete User",
 
 
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nti_figma/core/widgets/custom_svg.dart';
+import 'package:nti_figma/features/profile/delete_user/widget/delete_user_widget.dart';
 import '../../../core/translation/translation_key.dart';
 import '../../../core/utils/app_assets.dart';
 import '../../../core/utils/app_colors.dart';
@@ -32,6 +33,8 @@ class ProfileBody extends StatelessWidget {
           svg: CustomSvg(path:AppAssets.setting), onTap: () {
             Navigator.pushNamed(context, "Language");
           },),
+        SizedBox(height: 20,),
+DeleteUserWidget()
       ],
     );
   }

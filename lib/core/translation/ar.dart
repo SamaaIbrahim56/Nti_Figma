@@ -45,6 +45,7 @@ Map<String, String> ar =
   TranslationKeys.dontHaveAccount: "لا تملك حسابًا؟",
   TranslationKeys.loginError: "حدث خطأ أثناء تسجيل الدخول، يرجى المحاولة لاحقًا",
   TranslationKeys.alreadyHaveAccount: "هل لديك حساب؟",
+  TranslationKeys.DeleteUser: "حذف الحساب",
 
 
 

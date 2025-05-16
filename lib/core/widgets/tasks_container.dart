@@ -5,9 +5,8 @@ import 'package:nti_figma/features/add_task/data/models/task_model.dart';
 import '../utils/app_colors.dart';
 
 class TasksContainer extends StatelessWidget {
-  final TaskModel task;
 
-  const TasksContainer({super.key, required this.task,});
+  const TasksContainer({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class TasksContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                task.title,
+               "",
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 12,
@@ -64,7 +63,7 @@ class TasksContainer extends StatelessWidget {
             ],
           ),
           Text(
-            task.description,
+            "",
             style: TextStyle(
               fontWeight: FontWeight.w300,
               fontSize: 14,

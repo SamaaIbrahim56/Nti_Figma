@@ -1,42 +1,48 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nti_figma/features/add_task/data/models/task_model.dart';
-import 'package:nti_figma/features/add_task/data/repo/addtask_repo.dart';
-import 'package:nti_figma/features/add_task/manager/add_task_cubit/add_task_state.dart';
+import 'package:image_picker/image_picker.dart';
 
-class AddTaskCubit extends Cubit<AddTaskState>{
-  AddTaskCubit(this.repo):super(AddTaskInitState());
-static AddTaskCubit get(context)=> BlocProvider.of(context);
+import '../../data/models/task_model.dart';
+import '../../data/repo/addtask_repo.dart';
+import 'add_task_state.dart';
+
+class AddTaskCubit extends Cubit<AddTaskState> {
+  AddTaskCubit() : super(AddTaskInitialState());
+  static AddTaskCubit get(context) => BlocProvider.of(context);
+
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String? error;
- AddTaskRepo repo;
-  void onAddTaskPressed(){
+
+
+
+  TasksRepo tasksRepo = TasksRepo();
+  void onAddTaskPressed()async {
+    if(!formKey.currentState!.validate()) return;
     emit(AddTaskLoadingState());
-    if (formKey.currentState?.validate() == true) {
-      error =null;
-      final task=TaskModel(title: titleController.text, description: descriptionController.text);
-      repo.addTask(task);
-      emit(AddTaskSuccessState());
+    var result = await tasksRepo.addTask(task: TaskModel(
+      title: titleController.text,
+      description: descriptionController.text,
+      image: image,
+    ));
+    result.fold(
+            (error){emit(AddTaskErrorState(error: error));},
+            (message){emit(AddTaskSuccessState(message: message));}
+    );
 
-    } else {
-      error="Form is invalid. Please check the errors.";
-      emit(AddTaskErrorState (error!));
-
-    }
-
-  //   if (error==null){
-  //     emit(AddTaskSuccessState());
-  //   }else{
-  //     emit(AddTaskErrorState (error!));
-  //   }
   }
-  List<TaskModel> get tasks => repo.getTasks();
 
+  XFile? image;
+  void pickImage() async
+  {
+    final ImagePicker picker = ImagePicker();
+    image = await picker.pickImage(source: ImageSource.gallery);
+    emit(AddTaskChangeImageState());
+  }
 }
+
 
 
 

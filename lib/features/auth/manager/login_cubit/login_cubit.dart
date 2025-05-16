@@ -25,9 +25,9 @@ class LoginCubit extends Cubit<LoginState> {
           {
             emit(LoginErrorState(error));
           },
-              (r)
+              (userModel)
           {
-            UserModel userModel=UserModel(userName: userController.text);
+
 
             emit(LoginSuccessState(userModel));
           });

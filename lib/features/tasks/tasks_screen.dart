@@ -38,7 +38,7 @@ class TasksScreen extends StatelessWidget {
 
                 child: Center(
                   child: Text(
-                    "${ AddTaskCubit.get(context).tasks.length}",
+                    "",
                     style: TextStyle(
                       color: AppColors.backgroundButtom,
                       fontSize: 11,
@@ -55,10 +55,11 @@ class TasksScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20),
-                child: TasksContainer(task:AddTaskCubit.get(context).tasks[index] ),
+                child: TasksContainer( ),
               );
             },
-            itemCount: AddTaskCubit.get(context).tasks.length,
+            itemCount: 3,
+            // itemCount: AddTaskCubit.get(context).tasks.length,
           ),
 
         ],

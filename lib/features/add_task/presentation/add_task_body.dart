@@ -15,134 +15,170 @@ class AddTaskBody extends StatelessWidget {
   const AddTaskBody({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddTaskCubit,AddTaskState>(
-      builder: (context, state) {
+    return BlocProvider(
+      create: (context)=> AddTaskCubit(),
+      child:  BlocConsumer<AddTaskCubit, AddTaskState>(
+        listener:   (context, state)
+        {
+          if(state is AddTaskSuccessState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+          }
+          else if(state is AddTaskErrorState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+          }
+
+        }, builder: (context, state) {
         return Form(
-          key: AddTaskCubit.get(context).formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(23.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: CustomSvg(path: AppAssets.arrow_back),
+            key: AddTaskCubit
+                .get(context)
+                .formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(23.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: CustomSvg(path: AppAssets.arrow_back),
+                      ),
+                      SizedBox(width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.34),
+                      Text(
+                        TranslationKeys.addTask.tr,
+                        style: TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w300,
+                          color: AppColors.containerText,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 46),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        width: 261,
+                        height: 207,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AppAssets.logo),
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.34),
-                    Text(
+                  ),
+                  SizedBox(height: 29),
+
+                  SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.88,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.0775,
+                    child: TextFormField(
+                      enabled: true,
+                      controller: AddTaskCubit
+                          .get(context)
+                          .titleController,
+                      decoration: InputDecoration(
+                        hintText: TranslationKeys.title.tr,
+                        hintStyle: TextStyle(
+                          color: AppColors.grey,
+                          fontSize: 14,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        enabledBorder: AppBorderDecoration.enabledBorder,
+                        disabledBorder: AppBorderDecoration.disabledBorder,
+                        focusedBorder: AppBorderDecoration.enabledBorder,
+                        errorBorder: AppBorderDecoration.errorBorder,
+                        focusedErrorBorder:
+                        AppBorderDecoration.errorBorder,
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return TranslationKeys.fieldRequired.tr;
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 17),
+                  SizedBox(
+                    width: MediaQuery
+                        .of(context)
+                        .size
+                        .width * 0.88,
+                    height: MediaQuery
+                        .of(context)
+                        .size
+                        .height * 0.0775,
+                    child: TextFormField(
+                      enabled: true,
+                      controller:
+                      AddTaskCubit
+                          .get(context)
+                          .descriptionController,
+
+                      decoration: InputDecoration(
+                        hintText: TranslationKeys.description.tr,
+                        hintStyle: TextStyle(
+                          color: AppColors.grey,
+                          fontSize: 14,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        enabledBorder: AppBorderDecoration.enabledBorder,
+                        disabledBorder: AppBorderDecoration.disabledBorder,
+                        focusedBorder: AppBorderDecoration.enabledBorder,
+                        errorBorder: AppBorderDecoration.errorBorder,
+                        focusedErrorBorder:
+                        AppBorderDecoration.errorBorder,
+                      ),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return TranslationKeys.fieldRequired.tr;
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 17),
+
+                  GreenElevatedButton.create(
+                    child: Text(
                       TranslationKeys.addTask.tr,
                       style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w300,
-                        color: AppColors.containerText,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 46),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 261,
-                      height: 207,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(AppAssets.logo),
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 29),
-
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.88,
-                  height: MediaQuery.of(context).size.height * 0.0775,
-                  child: TextFormField(
-                    enabled: true,
-                    controller: AddTaskCubit.get(context).titleController,
-                    decoration: InputDecoration(
-                      hintText: TranslationKeys.title.tr,
-                      hintStyle: TextStyle(
-                        color: AppColors.grey,
-                        fontSize: 14,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: AppBorderDecoration.enabledBorder,
-                      disabledBorder: AppBorderDecoration.disabledBorder,
-                      focusedBorder: AppBorderDecoration.enabledBorder,
-                      errorBorder: AppBorderDecoration.errorBorder,
-                      focusedErrorBorder:
-                      AppBorderDecoration.errorBorder,
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return TranslationKeys.fieldRequired.tr;
-                      }
-                      return null;
+                    onPressed: () {
+                      AddTaskCubit.get(context).onAddTaskPressed();
                     },
                   ),
-                ),
-                SizedBox(height: 17),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.88,
-                  height: MediaQuery.of(context).size.height * 0.0775,
-                  child: TextFormField(
-                    enabled: true,
-                    controller:
-                        AddTaskCubit.get(context).descriptionController,
-
-                    decoration: InputDecoration(
-                      hintText: TranslationKeys.description.tr,
-                      hintStyle: TextStyle(
-                        color: AppColors.grey,
-                        fontSize: 14,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: AppBorderDecoration.enabledBorder,
-                      disabledBorder: AppBorderDecoration.disabledBorder,
-                      focusedBorder: AppBorderDecoration.enabledBorder,
-                      errorBorder: AppBorderDecoration.errorBorder,
-                      focusedErrorBorder:
-                      AppBorderDecoration.errorBorder,
-                    ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return TranslationKeys.fieldRequired.tr;
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                SizedBox(height: 17),
-
-                GreenElevatedButton.create(
-                  child: Text(
-                    TranslationKeys.addTask.tr,
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  onPressed: () {
-                    AddTaskCubit.get(context).onAddTaskPressed();
-                  },
-                ),
-              ],
-            ),
-          ),
+                ],
+              ),
+            )
         );
-      },
-    );
+      }
+      ),
+        );
+
   }
 }

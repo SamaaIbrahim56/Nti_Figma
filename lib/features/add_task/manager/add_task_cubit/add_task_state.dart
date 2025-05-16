@@ -1,12 +1,22 @@
-abstract class AddTaskState {}
+abstract class AddTaskState{}
 
-class AddTaskInitState extends AddTaskState {}
+class AddTaskInitialState extends AddTaskState{}
 
-class AddTaskLoadingState extends AddTaskState {}
+class AddTaskChangeEndDateState extends AddTaskState{}
 
-class AddTaskSuccessState extends AddTaskState {}
+class AddTaskChangeGroupState extends AddTaskState{}
 
-class AddTaskErrorState extends AddTaskState {
-  final String error;
-  AddTaskErrorState(this.error);
+class AddTaskChangeImageState extends AddTaskState{}
+
+class AddTaskLoadingState extends AddTaskState{}
+
+class AddTaskSuccessState extends AddTaskState{
+  String message;
+  AddTaskSuccessState({required this.message});
+}
+
+class AddTaskErrorState extends AddTaskState
+{
+  String error;
+  AddTaskErrorState({required this.error});
 }

@@ -4,8 +4,6 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nti_figma/core/cache/cache_data.dart';
 import 'package:nti_figma/core/cache/cache_helper.dart';
 import 'package:nti_figma/core/translation/translation_helper.dart';
-import 'package:nti_figma/features/add_task/data/repo/addtask_repo.dart';
-import 'package:nti_figma/features/add_task/manager/add_task_cubit/add_task_cubit.dart';
 import 'package:nti_figma/features/home/manager/user_cubit/user_cubit.dart';
 import 'package:nti_figma/features/splash/splash_screen.dart';
 import 'package:nti_figma/features/tasks/tasks_screen.dart';
@@ -32,11 +30,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => UserCubit()),
-        BlocProvider(create: (context) => AddTaskCubit(AddTaskRepo())),
-      ],
+    return BlocProvider(
+      create: (context)=>UserCubit(),
       child: GetMaterialApp(
         locale: Locale(CacheData.language!),
         translations: TranslationHelper(),

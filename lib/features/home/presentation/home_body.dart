@@ -33,11 +33,7 @@ class _HomeBodyState extends State<HomeBody> {
                   Navigator.pushNamed(context, "ProfileScreen");
                 },
               ),
-              BlocBuilder<AddTaskCubit, AddTaskState>(
-                builder:  (context, state) {
-                  return  AddTaskCubit.get(context).tasks.isEmpty
-                      ? Column(
-                    children: [
+
                       SizedBox(height: 79),
 
                       Text(
@@ -53,15 +49,16 @@ class _HomeBodyState extends State<HomeBody> {
                       SizedBox(height: MediaQuery.of(context).size.height * 0.22),
                     ],
                   )
-                      : TasksScreen();
-                },
-      
+                      // : TasksScreen();
+
+
               ),
 
 
-            ],
-          ),
-        ),
+
+
+
+
       ),
       floatingActionButton: FloatingActionButtonGreen(
         onTap: () {

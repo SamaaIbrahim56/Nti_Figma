@@ -49,6 +49,7 @@ abstract class TranslationKeys
   static const dontHaveAccount = "dontHaveAccount";
   static const loginError = "loginError";
   static const alreadyHaveAccount = "alreadyHaveAccount";
+  static const DeleteUser = "DeleteUser";
 
 
 
